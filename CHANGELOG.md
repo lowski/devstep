@@ -5,6 +5,7 @@ BREAKING CHANGES:
 
 IMPROVEMENTS:
 
+  - buildpacks/golang: Bump default Go to 1.8.2
   - buildpacks/ruby: Updated default bundler version
 
 ## [1.0.0](https://github.com/fgrehm/devstep/compare/v0.4.0...v1.0.0) (2016-03-10)

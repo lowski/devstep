@@ -8,18 +8,20 @@ set -eo pipefail
 # So that jq works
 export PATH="/opt/devstep/bin:$PATH"
 
-# Go releases for Darwin beginning with 1.2rc1
-# have included more than one build, depending
-# on the specific version of Mac OS X. Try to
-# account for that, but don't try too hard.
-# This doesn't affect Heroku builds, it's only
-# for testing on Darwin systems.
+# Go releases for Darwin beginning with 1.2rc1 and finished with 1.4.2
+# have included more than one build, depending on the specific version of Mac OS X.
+# Try to account for that, but don't try too hard.
+# This doesn't affect Heroku builds, it's only for testing on Darwin systems.
 platext() {
     case $1 in
     go1.0*|go1.1beta*|go1.1rc*|go1.1|go1.1.*) return ;;
     esac
-    case $(uname|tr A-Z a-z) in
-    darwin) printf %s -osx10.8 ;;
+    case $1 in
+    go1.2.*|go1.3|go1.3.*|go1.4|go1.4.1|go1.4.2)
+        if [ "$(uname|tr A-Z a-z)" == "darwin" ]; then
+            printf %s -osx10.8
+        fi
+        ;;
     esac
 }
 
@@ -52,16 +54,6 @@ then arch=amd64
 fi
 plat=$(uname|tr A-Z a-z)-$arch
 
-# Python
-# venv=$cache/venv
-# mkdir -p $cache/pip
-# python=python2.7
-# PATH=$buildpack/$plat/bin:$venv/bin:$PATH
-
-# virtualenv() {
-#     python "$buildpack/vendor/virtualenv-1.11.6/virtualenv.py" "$@"
-# }
-
 if test -f $build/Godeps
 then
     name=$(<$build/Godeps jq -r .ImportPath)
@@ -80,7 +72,7 @@ then
     name=$(git config --get-regexp '^remote.+\.url' | grep github | head -n1 | cut -f2 -d' ' | sed 's/^\(git\|https\):\/\///' | sed 's/^\w\+@//' | sed 's/:/\//' | sed 's/\.git$//' || echo -n '')
     popd &> /dev/null
 fi
-ver=${ver:-go${GOVERSION:-1.6}}
+ver=${ver:-go${GOVERSION:-1.8.2}}
 
 file=${GOFILE:-$ver.$(uname|tr A-Z a-z)-amd64$(platext $ver).tar.gz}
 url=${GOURL:-$(urlfor $ver $file)}
