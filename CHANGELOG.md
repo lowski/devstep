@@ -1,3 +1,12 @@
+## [2.0.0]
+BREAKING CHANGES:
+
+  - Switched to `heroku/cedar:16` [image](https://hub.docker.com/r/heroku/heroku/)
+
+IMPROVEMENTS:
+
+  - buildpacks/ruby: Updated default bundler version
+
 ## [1.0.0](https://github.com/fgrehm/devstep/compare/v0.4.0...v1.0.0) (2016-03-10)
 
 BREAKING CHANGES:

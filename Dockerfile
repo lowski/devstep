@@ -1,4 +1,4 @@
-FROM heroku/cedar:14
+FROM heroku/heroku:16-build
 MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 
 ENV HOME=/home/devstep \

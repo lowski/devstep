@@ -22,8 +22,8 @@ apt-get install -y --force-yes --no-install-recommends \
                 htop \
                 mercurial \
                 bzr \
-                nodejs-legacy \
-                libssl0.9.8 \
+                nodejs \
+                openssl \
                 software-properties-common \
                 bash-completion \
                 python \
