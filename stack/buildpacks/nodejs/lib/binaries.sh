@@ -25,7 +25,7 @@ install_nodejs() {
 
   local tarball_path="$cache_dir/$tarball"
   if [ -f $tarball_path ]; then
-    status "Using cached node $version tarball"
+    echo "Using cached node $version tarball"
   else
     echo "Downloading and installing node $version..."
     curl -L $download_url > $tarball_path
